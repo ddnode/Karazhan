@@ -1,0 +1,13 @@
+{
+    "name":"webapp",
+    "author":"wanyan.com",
+    "devDependencies": {
+        "grunt": "~0.4.0",
+        "grunt-contrib-jshint": "~0.7.1 ",
+        "grunt-contrib-uglify": "~0.1.2",
+        "grunt-contrib-concat": "~0.1.1"
+    },
+    "address":{
+            "yanex":"controller/yanex/"
+    }
+}
