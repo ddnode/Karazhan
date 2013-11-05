@@ -1,4 +1,5 @@
 var fs = require('fs');
+//修改test
 module.exports = function(grunt){
     var pkg = grunt.file.readJSON('package.json');
     //grunt插件，对项目分配运行命令，将进行代码检测，文件合并，文件压缩，单元测试等服务。
