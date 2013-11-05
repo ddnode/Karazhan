@@ -67,6 +67,20 @@ module.exports = function(grunt){
                         ext: '.min.js',
                     }
                 ]
+            },
+            purse:{
+                options:{
+                    banner:'<%=banner%>'
+                },
+                files:[
+                    {
+                        expand:true,
+                        cwd:'<%=pkg.address.purse%>',
+                        src:['./*.js'],
+                        dest:'<%=pkg.address.purse%>resources/',
+                        ext:'.min.js'
+                    }
+                ]
             }
         }
     });
@@ -102,6 +116,7 @@ module.exports = function(grunt){
                 var resources = entire[i].resources;
                 var systeminfo = entire[i].systeminfo;
                 for(var k = 0,le = resources.length;k<le;k++){  //循环真实的.js文件，准备检查文件内容
+                    // console.log(resources[k]);
                     var info = fs.statSync(resources[k]);  //文件流信息
                     var cont = grunt.file.read(resources[k]); //读取文件
                     var index = cont.split('\n'); //统计行数
@@ -114,6 +129,7 @@ module.exports = function(grunt){
                     });
                 }
             }
+            // console.log(entire);
         }
         extractinfo();
         var resolveflow = function(){
