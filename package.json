@@ -8,6 +8,7 @@
         "grunt-contrib-concat": "~0.1.1"
     },
     "address":{
-            "yanex":"controller/yanex/"
+        "yanex":"controller/yanex/",
+        "purse":"controller/purse/"
     }
 }
