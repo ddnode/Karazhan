@@ -100,12 +100,18 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    //分配命令执行
+    //项目yanex分配命令执行
     grunt.registerTask('yanex',['concat:yanex','uglify:yanex']);
-    grunt.registerTask('purse',['uglify:purse']);
-    grunt.registerTask('libs',['uglify:library']);
     grunt.registerTask('jsyanex',['jshint:yanex']);
+
+    //项目purse分配命令执行
+    grunt.registerTask('purse',['uglify:purse']);
     grunt.registerTask('jspurse',['jshint:purse']);
+
+    //库文件libs分配命令执行
+    grunt.registerTask('libs',['uglify:library']);
+    
+    
     //分配默认任务，检查前端系统文件。
     grunt.registerTask('default',function() {
         var regx = /(\.min)+\.js/,entire = [],e = 0;
