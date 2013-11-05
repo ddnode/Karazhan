@@ -20,6 +20,18 @@ module.exports = function(grunt){
                 options:{
 
                 } 
+            },
+            purse:{
+                files:[
+                    {
+                        expand:true,
+                        cwd:'<%=pkg.address.purse%>',
+                        src:['./*.js']
+                    }
+                ],
+                options:{
+
+                }
             }
         },
         concat:{  //文件合并
@@ -90,8 +102,10 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-contrib-uglify');
     //分配命令执行
     grunt.registerTask('yanex',['concat:yanex','uglify:yanex']);
+    grunt.registerTask('purse',['uglify:purse']);
     grunt.registerTask('libs',['uglify:library']);
-    grunt.registerTask('js',['jshint:yanex']);
+    grunt.registerTask('jsyanex',['jshint:yanex']);
+    grunt.registerTask('jspurse',['jshint:purse']);
     //分配默认任务，检查前端系统文件。
     grunt.registerTask('default',function() {
         var regx = /(\.min)+\.js/,entire = [],e = 0;
