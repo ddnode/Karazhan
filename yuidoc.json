@@ -1,0 +1,10 @@
+{
+    "name": "wanyanbusinessClass",
+    "description": "wanyan网业务类",
+    "version": "1.0.0",
+    "options": {
+        "linkNatives": "true",
+        "outdir": "./doc",
+        "paths": "."
+    }
+}

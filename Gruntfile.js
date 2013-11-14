@@ -1,7 +1,15 @@
 var fs = require('fs');
-//修改test
 module.exports = function(grunt){
     var pkg = grunt.file.readJSON('package.json');
+    var op = {
+        undef: true, // 禁止使用未定义变量
+        unused: true, // 禁止定义的变量未使用
+        camelcase: true, // 禁止使用未定义变量
+        curly: true, // if for 后语句块必须大括号包裹
+        maxdepth: 2, // 语句块嵌套层数限制
+        maxparams: 3, // 函数最大参数个数限制
+        asi: false //  分号缺失检测
+    }
     //grunt插件，对项目分配运行命令，将进行代码检测，文件合并，文件压缩，单元测试等服务。
     grunt.initConfig({
         pkg:pkg,
@@ -18,9 +26,7 @@ module.exports = function(grunt){
                         src: ['./*.js']
                     }
                 ],
-                options:{
-
-                } 
+                options:op
             },
             purse:{
                 files:[
@@ -30,9 +36,7 @@ module.exports = function(grunt){
                         src:['./*.js']
                     }
                 ],
-                options:{
-
-                }
+                options:op
             }
         },
         concat:{  //文件合并
@@ -75,7 +79,7 @@ module.exports = function(grunt){
                     {
                         expand: true,
                         cwd: 'libs/',
-                        src: ['./*.js'],
+                        src: ['./**/*.js'],
                         dest: 'libs/resources/',                         
                         ext: '.min.js',
                     }
@@ -95,26 +99,69 @@ module.exports = function(grunt){
                     }
                 ]
             }
+        },
+        cssmin:{
+            yanex:{
+                options:{
+                    banner:'<%=banner%>'
+                },
+                files:[
+                    {
+                        expand:true,
+                        cwd:'<%=pkg.cssress.yanex%>',
+                        src:['./*.css'],
+                        dest:'<%=pkg.cssress.yanex%>resources/',
+                        ext:'.min.css'
+                    }
+                ]
+            },
+            purse:{
+                options:{
+                    banner:'<%=banner%>'
+                },
+                files:[
+                    {
+                        expand:true,
+                        cwd:'<%=pkg.cssress.purse%>',
+                        src:['./*.css'],
+                        dest:'<%=pkg.cssress.purse%>resources/',
+                        ext:'.min.css'
+                    }
+                ]
+            },
+            plug:{
+                options:{
+                    banner:'<%=banner%>'
+                },
+                files:[
+                    {
+                        expand:true,
+                        cwd:'<%=pkg.cssress.plug%>',
+                        src:['./*.css'],
+                        dest:'<%=pkg.cssress.plug%>resources/',
+                        ext:'.min.css'
+                    }
+                ]
+            }
         }
     });
     //定制task
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     //项目yanex分配命令执行
-    grunt.registerTask('yanex',['concat:yanex','uglify:yanex']);
+    grunt.registerTask('yanex',['concat:yanex','uglify:yanex','cssmin:yanex']);
     grunt.registerTask('jsyanex',['jshint:yanex']);
-
     //项目purse分配命令执行
-    grunt.registerTask('purse',['uglify:purse']);
+    grunt.registerTask('purse',['uglify:purse','cssmin:purse']);
     grunt.registerTask('jspurse',['jshint:purse']);
-
     //库文件libs分配命令执行
-    grunt.registerTask('libs',['uglify:library']);
-    
-    
+    grunt.registerTask('libs',['uglify:library','cssmin:plug']);
     //分配默认任务，检查前端系统文件。
     grunt.registerTask('default',function() {
+        ///node_query();
         var regx = /(\.min)+\.js/,entire = [],e = 0;
         for(var f in pkg.address){  //从package.json中find项目地址
             var value = pkg.address[f],dir = fs.readdirSync(value);
@@ -131,7 +178,6 @@ module.exports = function(grunt){
             }
             e++; 
         }
-        // console.log(entire);
         var extractinfo = function(){
             for(var i = 0,len = entire.length;i<len;i++){
                 var resources = entire[i].resources;
@@ -220,7 +266,7 @@ module.exports = function(grunt){
                     for(var j = 0,le = fileLength.length;j<le;j++){
                         if(fileName.length < 2){
                             var _in = '[-----资源分析建议-----分拆模块]  file：' + fileName[j] + '  rows：' + fileLength[j] + '行'+'  author：'+ fileAuthor[j];
-                            fileLength[j] > partition ? str += _in + '\n' : str += 'The resources file only one \n';
+                            fileLength[j] > partition ? str += _in + '\n' : str += 'The resources file only one author：'+ fileAuthor[j] +'  file： '+fileName[j]+' \n';
                             continue;
                         }
                         str += rule(fileName[j],fileLength[j],fileAuthor[j]) + '\n';
@@ -244,6 +290,22 @@ module.exports = function(grunt){
         }
         //执行规则
         myrule();
-        grunt.log.writeln('run default true');
+        // grunt.log.writeln('run default true');
+    });
+    /**
+    *   邮件列表json
+    *   套字接协议
+    */
+    var mail = grunt.file.readJSON('mail.json');
+    var StmpSokect = function(){
+        
+    }
+    StmpSokect.prototype = {
+        send:function(){
+
+        }
+    }
+    grunt.registerTask('mail',function(){
+        
     });
 }
