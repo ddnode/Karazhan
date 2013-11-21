@@ -14,11 +14,13 @@
     },
     "address":{
         "yanex":"controller/yanex/",
-        "purse":"controller/purse/"
+        "purse":"controller/purse/",
+        "wanyan":"controller/wanyan/"
     },
     "cssress":{
         "yanex":"css/yanex/",
         "purse":"css/purse/",
+        "wanyan":"css/wanyan/",
         "plug":"css/plug/"
     }
 }

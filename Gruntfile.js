@@ -37,6 +37,16 @@ module.exports = function(grunt){
                     }
                 ],
                 options:op
+            },
+            wanyan:{
+                files:[
+                    {
+                        expand:true,
+                        cwd:'<%=pkg.address.wanyan%>',
+                        src:['./*.js']
+                    }
+                ],
+                options:op
             }
         },
         concat:{  //文件合并
@@ -98,6 +108,20 @@ module.exports = function(grunt){
                         ext:'.min.js'
                     }
                 ]
+            },
+            wanyan:{
+                options:{
+                    banner:'<%=banner%>'
+                },
+                files:[
+                    {
+                        expand:true,
+                        cwd:'<%=pkg.address.wanyan%>',
+                        src:['./*.js'],
+                        dest:'<%=pkg.address.wanyan%>resources/',
+                        ext:'.min.js'
+                    }
+                ]
             }
         },
         cssmin:{
@@ -129,6 +153,20 @@ module.exports = function(grunt){
                     }
                 ]
             },
+            wanyan:{
+                options:{
+                    banner:'<%=banner>'
+                },
+                files:[
+                    {
+                        expand:true,
+                        cwd:'<%=pkg.cssress.wanyan%>',
+                        src:['./*.css'],
+                        dest:'<%=pkg.cssress.wanyan>resources/',
+                        ext:'.min.css'
+                    }
+                ]
+            },
             plug:{
                 options:{
                     banner:'<%=banner%>'
@@ -152,11 +190,14 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     //项目yanex分配命令执行
-    grunt.registerTask('yanex',['concat:yanex','uglify:yanex','cssmin:yanex']);
+    grunt.registerTask('yanex',['uglify:yanex','cssmin:yanex']);
     grunt.registerTask('jsyanex',['jshint:yanex']);
     //项目purse分配命令执行
     grunt.registerTask('purse',['uglify:purse','cssmin:purse']);
     grunt.registerTask('jspurse',['jshint:purse']);
+    //项目wanyan分配命令执行
+    grunt.registerTask('wanyan',['uglify:wanyan','cssmin:wanyan']);
+    grunt.registerTask('jswanyan',['jshint:wanyan']);
     //库文件libs分配命令执行
     grunt.registerTask('libs',['uglify:library','cssmin:plug']);
     //分配默认任务，检查前端系统文件。
@@ -187,7 +228,11 @@ module.exports = function(grunt){
                     var info = fs.statSync(resources[k]);  //文件流信息
                     var cont = grunt.file.read(resources[k]); //读取文件
                     var index = cont.split('\n'); //统计行数
-                    var first = JSON.parse(index[0].replace('//',"")); //提取头信息
+                    try{
+                        var first = JSON.parse(index[0].replace('//',"")); //提取头信息
+                    }catch(e){
+                        throw new Error(e + resources[k]);
+                    }
                     systeminfo.push({  //将头信息,js文件，行数进行存储
                         "name":first.name,
                         "fs":resources[k],
@@ -290,22 +335,6 @@ module.exports = function(grunt){
         }
         //执行规则
         myrule();
-        // grunt.log.writeln('run default true');
-    });
-    /**
-    *   邮件列表json
-    *   套字接协议
-    */
-    var mail = grunt.file.readJSON('mail.json');
-    var StmpSokect = function(){
-        
-    }
-    StmpSokect.prototype = {
-        send:function(){
-
-        }
-    }
-    grunt.registerTask('mail',function(){
-        
+        grunt.log.writeln('run default true');
     });
 }
