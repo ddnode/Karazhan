@@ -162,3 +162,82 @@ mail：开发人员的邮箱。
 	Resources file name：open.py
 	[-----资源分析建议-----分拆模块]  file：controller/open/open_de.js  rows：3037行  author：向文文
 	[-----资源分析建议-----合并文件]  file：controller/open/open_demo.js  rows：51行  author：向文文
+
+## require.js 编译##
+
+1,下载r.js放置在项目根目录下
+
+2,以项目require为例子讲解，如何运行r.js
+
+目录结构如下：
+
+   app - weixin - *.js
+
+   require.js
+
+   r.js
+
+   index.html
+
+在index.html中，我是如此引用require.js的。
+
+	require.config({
+		baseUrl:'app/weixin/main',
+		paths:{
+			jquery:'http://127.0.0.1/require/libs/jquery'
+		}
+	});
+	require(['main'],function(main){
+		main.init();
+	});
+
+我在main中如此定义我的模块，main模块中依赖了config模块。
+
+	define(["./config"],function(config){
+		return{
+			init:function(){
+				console.log(config.max)
+			}
+		}
+	});
+
+我在config模块中如此定义：
+
+	define(function(){
+		return{
+			max:"HUGHJFHDJKSHFJ"
+		}
+	});
+
+我的配置build.js放置在app/weixin目录中，它如此定义：
+
+	({
+		baseUrl:'./',
+		name:'main',
+		out:'main/main.js'
+	})
+
+如果我在根目录，也就是require目录，准备运行app/weixin/build.js配置，那么相对于此文件，我的baseUrl就是'./'。
+
+baseUrl：相对路径
+
+name：入口文件
+
+out：生成的目标文件
+
+removeCombined：如果为true，优化器（optimizer）将从输出目录中删除已合并的文件。
+
+shim：为那些没有使用define()声名依赖关系及设置模块值的模块，配置依赖关系与“浏览器全局”出口的脚本。
+
+打开命令行工具，输入node r.js -o app/weixin/build.js，现在就自动构建了一个main.js在main目录中，上传时不要忘记了修改index.html页面中的baseUrl。
+
+##r.js资料##
+
+<a href="http://www.oschina.net/translate/optimize-requirejs-projects">http://www.oschina.net/translate/optimize-requirejs-projects</a>
+
+<a href="https://github.com/jrburke/r.js">https://github.com/jrburke/r.js</a>
+
+<a href="https://github.com/xueduany/r.js">https://github.com/xueduany/r.js</a>
+
+<a href="https://github.com/xiangwenwe/r.js/blob/master/build/example.build.js">r.js匹配参数查看</a>
+
