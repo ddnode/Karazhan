@@ -374,3 +374,17 @@ git push origin master
 
 点击此按钮，添加日志信息：为什么要提交此次修改，作者看见后会评估是否需要。
 
+## weinre远程调试 ##
+
+>npm install -g weinre  安装weinre
+
+>在相应的目录中输入：weinre --httpPort 8080[端口号任意] --boundHost -all-
+
+在调试页面，载入一个weinre的js文件。
+
+资料：<a href="http://js8.in/2013/11/20/%E4%BA%94%E4%B8%AA%E4%BD%A0%E5%BF%85%E9%A1%BB%E7%9F%A5%E9%81%93%E7%9A%84javascript%E5%92%8Cweb-debug%E6%8A%80%E6%9C%AF/">远程调试</a>
+
+##ES5 API##
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects</a>
+
