@@ -388,3 +388,10 @@ git push origin master
 
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects</a>
 
+## wanyan mobile 使用技术文档 ##
+
+<a href="http://www.requirejs.org/docs/api.html">require.js api</a>
+
+<a href="http://zeptojs.com/">template api</a>
+
+<a href="https://github.com/xiangwenwe/artTemplate">zepto.js api</a>
