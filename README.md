@@ -1,4 +1,73 @@
-grunt----学习用例，前端文件系统分析
+# Karazhan #
+
+此项目用于收集nodejs，mongodb学习资料。
+
+grunt----学习用例，前端文件系统分析。
+
+其他学习资料
+
+## 中文API收集 ##
+
+nodejs <a href="http://nodeapi.ucdok.com/#/api/">http://nodeapi.ucdok.com/#/api/</a>
+
+express3.* <a href="http://expressjs.jser.us/">http://expressjs.jser.us/</a>
+
+Juicer <a href="http://juicer.name/docs/docs_zh_cn.html">http://juicer.name/docs/docs_zh_cn.html</a>
+
+Meteor <a href="http://d0cs.meteor.com/">http://d0cs.meteor.com/</a>
+
+Jade <a href="http://expressjs.jser.us/jade.html">http://expressjs.jser.us/jade.html</a>
+
+## NODE资料 ##
+
+node.js入门中文版  <a href="http://nodebeginner.org/index-zh-cn.html">http://nodebeginner.org/index-zh-cn.html</a>
+
+深入理解Express  <a href="http://xvfeng.me/posts/understanding-expressjs/">http://xvfeng.me/posts/understanding-expressjs/</a>
+
+NodeJS 和 Socket.io 中文入门教程  <a href="http://t.cn/zOMwxCg">http://t.cn/zOMwxCg </a>
+
+Mongoose 基本功能使用  <a href="http://t.cn/zOIKPeB ">http://t.cn/zOIKPeB </a>
+
+让我们基于Node.js创建一个Web应用系列(5篇) <a href="http://t.cn/z8JnzkA ">http://t.cn/z8JnzkA </a>
+
+一周node.js系列(7篇)  <a href="http://t.cn/zOKuc9D">http://t.cn/zOKuc9D</a> 
+
+从零开始nodejs系列  <a href="http://blog.fens.me/series-nodejs/ ">http://blog.fens.me/series-nodejs/ </a>
+
+一起学node.js (荐)  <a href="http://t.cn/zHxNXXt">http://t.cn/zHxNXXt</a> 
+
+Node.js高级编程(荐)  <a href="http://t.cn/zYmuqaH">http://t.cn/zYmuqaH</a> 
+
+深入浅出Node.js <a href="http://www.infoq.com/cn/master-nodejs">http://www.infoq.com/cn/master-nodejs</a> 
+
+Node.js零起点开发 <a href="http://blog.csdn.net/kaosini/article/details/8084268">http://blog.csdn.net/kaosini/article/details/8084268</a> 
+
+node.js入门(共13篇) <a href="http://www.cnblogs.com/softlover/category/406516.html">http://www.cnblogs.com/softlover/category/406516.html</a> 
+
+snoopyxdy的博客(大量node及express api的解读及进阶内容) <a href="http://t.cn/zQuKMKH">http://t.cn/zQuKMKH </a>
+
+用node.js写web框架系列  <a href="http://my.oschina.net/Jeky/blog?catalog=262655">http://my.oschina.net/Jeky/blog?catalog=262655</a> 
+
+Luics的node.js系列  <a href="http://t.cn/zjATQlf">http://t.cn/zjATQlf</a> 
+
+使用node.js建博客 <a href="http://witcheryne.iteye.com/blog/1172069">http://witcheryne.iteye.com/blog/1172069</a> 
+
+用socket.io 搭建聊天室: <a href="https://github.com/nswbmw/N-chat/wiki/_pages">https://github.com/nswbmw/N-chat/wiki/_pages</a> 
+
+了不起的node.js： http://book.douban.com/subject/25767596/ 2014年1月 
+
+深入浅出nodejs： http://book.douban.com/subject/25768396/ 2013年12月 
+
+node.js入门经典： http://book.douban.com/subject/23780706/ 2013年4月 
+
+node.js开发指南： http://book.douban.com/subject/10789820/ 2012年7月 
+
+Node Web开发： http://book.douban.com/subject/10586326/ 2012年4月 
+
+##社区##
+
+cnodejs <a href="http://cnodejs.org/">http://cnodejs.org/</a>
+
 
 ### 准备工作： ###
 
@@ -240,4 +309,67 @@ shim：为那些没有使用define()声名依赖关系及设置模块值的模�
 <a href="https://github.com/xueduany/r.js">https://github.com/xueduany/r.js</a>
 
 <a href="https://github.com/xiangwenwe/r.js/blob/master/build/example.build.js">r.js匹配参数查看</a>
+
+## github入门简介 ##
+
+以githubfororder项目为例，从建立项目到如何pull远程分支，更新远程代码。
+
+1，在github建立一个新项目，名为githubfororder，如：create a new repo。
+
+2，建立新项目之后，github会给予一个ssh地址，保存这个地址。
+
+##建立仓库##
+
+###把远程项目仓库clone到本地###
+
+git clone git@github.com:xiangwenwe/githubfororder
+
+###建立README.md文件###
+
+touch README.md
+
+###初始化项目###
+
+git init
+
+###把README.md文件提交到远程仓库###
+
+git add README.md
+
+git commit -m "add README.md 13.31"
+
+git push origin master
+
+###查看本地仓库文件###
+
+git ls-files
+
+###查看提交###
+git show 
+
+##远程仓库更新到本地##
+
+git remote -v  //查看仓库源
+
+cd githubfororder //进入本地githubfororder仓库
+
+git fetch origin master //从远程仓库更新代码到本地仓库
+
+## Pull Requests ##
+
+在github上fork别人的项目。
+
+git clone git@github.com:xiangwenwe/githubfororder clone远程项目到本地。
+
+假设我们修改README.md文件。
+
+git add README.md
+
+git commit -m "update README.md time 17.09"
+
+git push origin master
+
+到此，我们修改的README.md文件已经被提交到自己的远程仓库中。打开github页面，找到右上角的Pull Requests按钮
+
+点击此按钮，添加日志信息：为什么要提交此次修改，作者看见后会评估是否需要。
 
