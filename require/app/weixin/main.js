@@ -1,1 +1,0 @@
-define("config",[],function(){return{max:"HUGHJFHDJKSHFJ"}});define("main",["./config"],function(e){return{init:function(){console.log(e.max)}}});
