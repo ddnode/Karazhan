@@ -1,5 +1,5 @@
 ({
 	baseUrl:'./',
-	name:'main',
-	out:'main/main.js'
+	name:'main.1.00',
+	out:'build/main.1.00.js'
 })

@@ -15,12 +15,12 @@
 	<body>
 		<script type="text/javascript">
 			require.config({
-				baseUrl:'app/weixin/main',
+				baseUrl:'app/weixin/build',
 				paths:{
 					jquery:'http://127.0.0.1/require/libs/jquery'
 				}
 			});
-			require(['main'],function(main){
+			require(['main.1.00'],function(main){
 				main.init();
 			});
 		</script>
