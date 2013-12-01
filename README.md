@@ -399,4 +399,4 @@ git push origin master
 
 <a href="https://code.google.com/p/crypto-js/">crypto-js</a>
 
-<a href="">例子</a>
+<a href="https://github.com/xiangwenwe/Karazhan/tree/master/encryption">例子</a>
