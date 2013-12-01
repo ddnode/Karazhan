@@ -384,14 +384,19 @@ git push origin master
 
 资料：<a href="http://js8.in/2013/11/20/%E4%BA%94%E4%B8%AA%E4%BD%A0%E5%BF%85%E9%A1%BB%E7%9F%A5%E9%81%93%E7%9A%84javascript%E5%92%8Cweb-debug%E6%8A%80%E6%9C%AF/">远程调试</a>
 
-##ES5 API##
+## mobile##
+<a href="https://github.com/EightMedia/hammer.js">https://github.com/EightMedia/hammer.js</a>
 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects</a>
+<a href="http://jinlong.github.io/blog/2013/09/23/safari-ios7-html5-problems-apis-review/">iOS 7 的 Safari 和 HTML5：问题，变化和新 API</a>
 
-## wanyan mobile 使用技术文档 ##
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects">ES5 API</a>
 
-<a href="http://www.requirejs.org/docs/api.html">require.js api</a>
+##加密||解密##
 
-<a href="http://zeptojs.com/">template api</a>
+服务端使用php，前端使用js，双向加密解密。
 
-<a href="https://github.com/xiangwenwe/artTemplate">zepto.js api</a>
+<a href="http://us3.php.net/mcrypt">mcrypt</a>
+
+<a href="https://code.google.com/p/crypto-js/">crypto-js</a>
+
+<a href="">例子</a>

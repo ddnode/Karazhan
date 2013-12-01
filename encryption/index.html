@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<title></title>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<script type="text/javascript" src="jquery-2.0.3.js"></script>
+		<script type="text/javascript" src="crypto/components/core.js"></script>
+		<script type="text/javascript" src="crypto/rollups/aes.js"></script>
+		<script type="text/javascript" src="crypto/components/pad-zeropadding.js"></script>
+	</head>
+	<body>
+		账号：<input type="text" id="name">
+		<br/>
+		密码：<input type="password" id="pass">
+		<br/>
+		<button id="submite">js提交AES密文给php解密</button>
+		<br/>
+		<button id="php">js解密php AES加密的密文</button>
+		<br/>
+		<button id="js">js解密js AES密文</button>
+		<script type="text/javascript">
+			$(function(){
+				var publicKey,ivKey;
+				$.ajax({
+					url:'server/decryptKey.php',
+					type:'GET',
+					dataType:'json',
+					success:function(data){
+						publicKey  = CryptoJS.enc.Latin1.parse(data.p);
+						ivKey  = CryptoJS.enc.Latin1.parse(data.v);
+					}
+				});
+				/**
+				*	publicKey 32|16 md5加密密文，由服务端动态生成公共密钥
+				*	ivkey 由服务端动态生成算法密钥
+				*	遵守AES算法对，字符串进行加密，若未满位数则，统一使用zeropadding填充方式，模式统一使用CBC模式。
+				*	编码模式UTF-8
+				*	
+				*/
+				$('#submite').on('click',function(){
+					var password = $('#pass').val();
+					var name = $('#name').val();
+					var intr = {"p":password,"u":name};
+					var tr = JSON.stringify(intr);
+					var trCrypt = CryptoJS.AES.encrypt(tr,publicKey,{
+						iv:ivKey,
+						mode:CryptoJS.mode.CBC,
+            			padding:CryptoJS.pad.ZeroPadding
+					});
+					var trmi = trCrypt.toString();
+					//js加密，提交给php解密
+					$.ajax({
+						url:'server/login.php',
+						type:'POST',
+						data:{"info":trmi},
+						success:function(data){
+							
+						}
+					});
+				});
+				//js解密php加密的密文
+				$('#php').on('click',function(){
+					var php = 'VBZ/toimp9TZN3iVpbJTm7hwhqyKEpjTSIniRnsKI88=';
+					var hub = CryptoJS.AES.decrypt(php,publicKey,{
+						iv:ivKey,
+						mode:CryptoJS.mode.CBC,
+	         			padding:CryptoJS.pad.ZeroPadding
+					});
+					var hmi = hub.toString(CryptoJS.enc.Utf8);
+					console.log(hmi);
+				});
+				//js解密js加密的密文
+				$('#js').on('click',function(){
+					//加密
+					var trCrypt = CryptoJS.AES.encrypt('wenren',publicKey,{
+						iv:ivKey,
+						mode:CryptoJS.mode.CBC,
+            			padding:CryptoJS.pad.ZeroPadding
+					});
+					var trmi = trCrypt.toString();
+					//解密
+					var decrypted = CryptoJS.AES.decrypt(trmi,publicKey,{
+						iv:ivKey,
+						mode:CryptoJS.mode.CBC,
+             			padding:CryptoJS.pad.ZeroPadding
+					});
+					var jmi = decrypted.toString(CryptoJS.enc.Utf8);
+					console.log(jmi);
+				});
+			});
+		</script>
+	</body>
+</html>
