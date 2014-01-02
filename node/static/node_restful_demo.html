@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<title>简单nodejs restful 学习例子</title>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<style type="text/css">
+		html,body{
+			font-family: 微软雅黑;
+			font-size: 16px;
+		}
+		a{
+			color: #333;
+			text-decoration: none;
+			font-size: 18px;
+			font-family: 微软雅黑;
+		}
+		h1,h3{
+			margin: 0px;
+			padding: 0px;
+		}
+		</style>
+		<script type="text/javascript" src="libs/jquery.js"></script>
+		<script type="text/javascript" src="libs/underscore.js"></script>		
+	</head>
+	<body>
+		<div style="margin-bottom:10px;">
+			<button id="myget">点击我发送GET请求</button>
+		</div>
+		<div style="padding:10px;background:#efefef;color:#666;" id="mycontais">
+			<script type="text/template" id="myTemplate">
+				<h1>GET请求渲染</h1>
+				<%data.forEach(function(v){%>
+					<h3><%=v.id%></h3>
+					<h3><%=v.username%></h3>
+					<h3><%=v.userpass%></h3>
+				<%})%>
+			</script>
+		</div>
+		<div style="margin:10px 0 10px 0;">
+			<button id="mypost">点击我发送POST请求</button>
+			<h3>填写post参数</h3>
+			参数一<input type="text" id="username" name="username">
+			参数二<input type="text" id="userpass" name="userpass">
+		</div>
+		<script type="text/javascript">
+			$(function(){
+				//测试get
+				var myget = $('#myget');
+				var mycontais = $('#mycontais');
+				var myTemplate = $('#myTemplate').html();
+				$('#myTemplate').remove();
+				var bool = true;
+				myget.on('click',function(){
+					if(bool){
+						bool = false;
+						$.ajax({
+							url: '/getUser',
+							type: 'GET',
+							dataType: 'json',
+							success:function(json){
+								var html = _.template(myTemplate,{data:json});
+								mycontais.html(html);
+							},
+							error:function(e){
+								console.log(e);
+							}
+						});
+					}					
+				});
+				//测试post
+				var mypost = $('#mypost');
+				var name = $('#username');
+				var pass = $('#userpass');
+				name.val('');
+				pass.val('');
+				mypost.on('click',function(){
+					if(!(name.val().length || pass.val().length)){
+						alert('不能为空');
+						return false;
+					}
+					var info = JSON.stringify({
+						"username":name.val(),
+						"userpass":pass.val()
+					});
+					$.ajax({
+						url:'/postUser',
+						type:'POST',
+						dataType:'json',
+						data:info,
+						success:function(json){
+							if(!json.error){
+								alert(json.build);
+								return false;
+							}
+							alert(json.error);
+						},
+						error:function(e){
+
+						}
+					})
+				});
+			});
+		</script>
+	</body>
+</html>
